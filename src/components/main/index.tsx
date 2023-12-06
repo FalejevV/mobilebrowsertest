@@ -5,6 +5,7 @@ import EmptyView from "../empty-view";
 
 export default function ScrollExperience() {
   const [showScrollExperience, setShowScrollExperience] = useState(false);
+  const [touched, setTouched] = useState(false);
   useEffect(() => {
     if (showScrollExperience) {
       document.body.style.overflow = "hidden";
@@ -12,24 +13,6 @@ export default function ScrollExperience() {
       document.body.style.overflow = "auto";
     }
   }, [showScrollExperience]);
-
-  useEffect(() => {
-    window.addEventListener("resize", () => {
-      const container = document.getElementById("mainContainer");
-      if (container) {
-        container.scrollTop += 1;
-      }
-    });
-
-    return () => {
-      window.removeEventListener("resize", () => {
-        const container = document.getElementById("mainContainer");
-        if (container) {
-          container.scrollTop += 1;
-        }
-      });
-    };
-  }, []);
 
   const list = [0, 1, 2, 3, 4, 5, 6, 7, 8];
 
@@ -48,6 +31,8 @@ export default function ScrollExperience() {
       <button onClick={() => setShowScrollExperience(true)}>SHOW</button>
       {showScrollExperience && (
         <div
+          onTouchStart={() => setTouched(true)}
+          onTouchEnd={() => setTouched(false)}
           id="mainContainer"
           className="no-scrollbar fixed left-0 top-0  z-[51] h-dvh  w-screen snap-y snap-mandatory  items-center justify-center overflow-scroll bg-white"
         >

@@ -3,7 +3,8 @@
 import HorizontalScrollWrap from "../horizontal-scroll-wrap";
 import ViewWrapper from "../view-wrapper";
 import HorizontalChildWrap from "../horizontal-scroll-wrap/horizontal-child-wrap";
-import { memo } from "react";
+import { memo, useEffect } from "react";
+import useInViewHorizontal from "../horizontal-in-view-hook";
 
 const colorNames = [
   "red",
@@ -35,12 +36,30 @@ function getGradientRandomColors(): [string, string] {
 
 function EmptyView({ index }: { index: number }) {
   const [fromColor, toColor] = getGradientRandomColors();
+
+  const { inViewRef, inView, horizontalRef, preloadInView } =
+    useInViewHorizontal();
+
+  useEffect(() => {
+    function inViewFunc() {
+      if (inView && inViewRef && inViewRef.current) {
+        const element = inViewRef.current as HTMLDivElement;
+        element.scrollIntoView();
+      }
+    }
+    window.addEventListener("resize", inViewFunc);
+
+    return () => {
+      window.removeEventListener("resize", inViewFunc);
+    };
+  }, [inView, inViewRef]);
+
   return (
     <ViewWrapper>
       <div
         className={`min-w-screen relative flex h-full w-screen items-center snap-always snap-mandatory snap-center justify-center bg-gradient-to-tl from-${fromColor}-400 to-${toColor}-400`}
       >
-        <HorizontalScrollWrap>
+        <HorizontalScrollWrap inViewRef={inViewRef}>
           <HorizontalChildWrap>
             <div className="w-full h-full flex items-center justify-center text-black flex-col gap-4">
               View: {index}
