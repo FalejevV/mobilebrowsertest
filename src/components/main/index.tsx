@@ -14,25 +14,24 @@ export default function ScrollExperience() {
       document.body.style.overflow = "auto";
       document.body.style.height = "auto";
     }
+    const enterFullscreen = () => {
+      const element = document.documentElement as any;
+
+      if (element.requestFullscreen) {
+        element.requestFullscreen();
+      } else if (element.mozRequestFullScreen) {
+        element.mozRequestFullScreen();
+      } else if (element.webkitRequestFullscreen) {
+        element.webkitRequestFullscreen();
+      } else if (element.msRequestFullscreen) {
+        element.msRequestFullscreen();
+      }
+    };
+    enterFullscreen();
     return () => {
       document.body.style.height = "auto";
     };
   }, [showScrollExperience]);
-
-  const enterFullscreen = () => {
-    const element = document.documentElement as any;
-
-    if (element.requestFullscreen) {
-      element.requestFullscreen();
-    } else if (element.mozRequestFullScreen) {
-      element.mozRequestFullScreen();
-    } else if (element.webkitRequestFullscreen) {
-      element.webkitRequestFullscreen();
-    } else if (element.msRequestFullscreen) {
-      element.msRequestFullscreen();
-    }
-  };
-  enterFullscreen();
 
   const list = [0, 1, 2, 3, 4, 5, 6, 7, 8];
 
