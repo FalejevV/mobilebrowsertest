@@ -8,19 +8,25 @@ export default function ScrollExperience() {
   useEffect(() => {
     if (showScrollExperience) {
       document.body.style.overflow = "hidden";
-      const element = document.documentElement as HTMLElement;
+      const element = document.documentElement as any;
       if (element.requestFullscreen) {
         element.requestFullscreen();
+      } else if (element.mozRequestFullScreen) {
+        element.mozRequestFullScreen();
+      } else if (element.webkitRequestFullscreen) {
+        element.webkitRequestFullscreen();
+      } else if (element.msRequestFullscreen) {
+        element.msRequestFullscreen();
       }
     } else {
       document.body.style.overflow = "auto";
       if (document.fullscreenElement) {
         if (document.exitFullscreen) {
           document.exitFullscreen();
-        } else if (document.mozCancelFullScreen) {
-          document.mozCancelFullScreen();
-        } else if (document.webkitExitFullscreen) {
-          document.webkitExitFullscreen();
+        } else if ((document as any).mozCancelFullScreen) {
+          (document as any).mozCancelFullScreen();
+        } else if ((document as any).webkitExitFullscreen) {
+          (document as any).webkitExitFullscreen();
         }
       }
     }
