@@ -3,6 +3,7 @@
 import HorizontalScrollWrap from "../horizontal-scroll-wrap";
 import ViewWrapper from "../view-wrapper";
 import HorizontalChildWrap from "../horizontal-scroll-wrap/horizontal-child-wrap";
+import { memo } from "react";
 
 const colorNames = [
   "red",
@@ -32,12 +33,12 @@ function getGradientRandomColors(): [string, string] {
   return [fromColor, toColor];
 }
 
-export default function EmptyView({ index }: { index: number }) {
+function EmptyView({ index }: { index: number }) {
   const [fromColor, toColor] = getGradientRandomColors();
   return (
     <ViewWrapper>
       <div
-        className={`min-w-screen relative transition-all duration-200 flex h-full w-screen items-center justify-center bg-gradient-to-tl from-${fromColor}-400 to-${toColor}-400`}
+        className={`min-w-screen relative flex h-full w-screen items-center justify-center bg-gradient-to-tl from-${fromColor}-400 to-${toColor}-400`}
       >
         <HorizontalScrollWrap>
           <HorizontalChildWrap>
@@ -50,3 +51,5 @@ export default function EmptyView({ index }: { index: number }) {
     </ViewWrapper>
   );
 }
+
+export default memo(EmptyView);

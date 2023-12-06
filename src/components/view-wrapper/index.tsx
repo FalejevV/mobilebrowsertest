@@ -13,7 +13,7 @@ export default forwardRef<
   return (
     <div
       ref={ref as LegacyRef<HTMLDivElement>}
-      className="relative mx-auto my-auto flex h-dvh max-h-dvh min-h-dvh w-screen max-w-4xl snap-center snap-always flex-col items-center justify-center px-4"
+      className="relative mx-auto my-auto flex h-dvh max-h-dvh min-h-dvh w-screen max-w-4xl flex-col items-center justify-center px-4"
     >
       {!!props.title && (
         <div className="absolute left-1/2 top-4 -translate-x-1/2 text-center text-3xl font-bold text-teal-700">

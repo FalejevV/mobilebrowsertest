@@ -1,9 +1,13 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { PanInfo, motion, useAnimation } from "framer-motion";
 import EmptyView from "../empty-view";
+
 export default function ScrollExperience() {
   const [showScrollExperience, setShowScrollExperience] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const controls = useAnimation();
 
   useEffect(() => {
     if (showScrollExperience) {
@@ -11,41 +15,59 @@ export default function ScrollExperience() {
     } else {
       document.body.style.overflow = "auto";
     }
+    controls.start({ y: -currentIndex * 100 + "dvh" });
+  }, [showScrollExperience, currentIndex, controls]);
 
-    return () => {
-      document.body.style.overflow = "auto";
-    };
-  }, [showScrollExperience]);
+  const list = [0, 1, 2, 3, 4, 5, 6, 7, 8];
 
-  useEffect(() => {
-    const vh = window.innerHeight * 0.01;
-    document.documentElement.style.setProperty("--vh", `${vh}px`);
-    window.addEventListener("resize", () => {
-      const vh = window.innerHeight * 0.01;
-      document.documentElement.style.setProperty("--vh", `${vh}px`);
-    });
-    return () => {
-      window.removeEventListener("resize", () => {
-        const vh = window.innerHeight * 0.01;
-        document.documentElement.style.setProperty("--vh", `${vh}px`);
-      });
-    };
+  const handleDragEnd = (_, info: PanInfo) => {
+    const { offset } = info;
+    if (offset.y > 100 && currentIndex > 0) {
+      setCurrentIndex((prevIndex) => prevIndex - 1);
+    } else if (offset.y < -100 && currentIndex < list.length - 1) {
+      setCurrentIndex((prevIndex) => prevIndex + 1);
+    }
+  };
+
+  const listMemo = useMemo(() => {
+    return (
+      <>
+        {list.map((index) => (
+          <motion.div
+            key={index}
+            style={{
+              height: "100%",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <EmptyView index={index} key={index} />
+          </motion.div>
+        ))}
+      </>
+    );
   }, []);
 
   return (
     <div>
       <button onClick={() => setShowScrollExperience(true)}>SHOW</button>
       {showScrollExperience && (
-        <div className="no-scrollbar fixed left-0 top-0 z-[51] h-dvh flex-col w-screen snap-y snap-mandatory  items-start justify-start flex overflow-scroll bg-white">
-          <EmptyView index={0} />
-          <EmptyView index={1} />
-          <EmptyView index={2} />
-          <EmptyView index={3} />
-          <EmptyView index={4} />
-          <EmptyView index={5} />
-          <EmptyView index={6} />
-          <EmptyView index={7} />
-          <EmptyView index={8} />
+        <div className="no-scrollbar fixed left-0 top-0 z-[51] h-dvh flex-col w-screen items-start justify-start flex overflow-hidden bg-white">
+          <motion.div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              height: "100%",
+              width: "100%",
+            }}
+            animate={controls}
+            drag="y"
+            dragConstraints={{ top: 10, bottom: 10 }}
+            onDragEnd={handleDragEnd}
+          >
+            {listMemo}
+          </motion.div>
         </div>
       )}
     </div>
