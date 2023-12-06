@@ -23,9 +23,13 @@ export default function ScrollExperience() {
       if (document.fullscreenElement) {
         if (document.exitFullscreen) {
           document.exitFullscreen();
+          //@ts-ignore
         } else if (document.webkitExitFullscreen) {
+          //@ts-ignore
           document.webkitExitFullscreen();
+          //@ts-ignore
         } else if (document.msExitFullscreen) {
+          //@ts-ignore
           document.msExitFullscreen();
         }
       }
