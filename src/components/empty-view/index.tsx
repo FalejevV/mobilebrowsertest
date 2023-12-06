@@ -42,8 +42,9 @@ function EmptyView({ index }: { index: number }) {
       >
         <HorizontalScrollWrap>
           <HorizontalChildWrap>
-            <div className="w-full h-full flex items-center justify-center text-black">
+            <div className="w-full h-full flex items-center justify-center text-black flex-col gap-4">
               View: {index}
+              <textarea></textarea>
             </div>
           </HorizontalChildWrap>
         </HorizontalScrollWrap>
