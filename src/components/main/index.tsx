@@ -9,9 +9,14 @@ export default function ScrollExperience() {
   useEffect(() => {
     if (showScrollExperience) {
       document.body.style.overflow = "hidden";
+      document.body.style.height = "100svh";
     } else {
       document.body.style.overflow = "auto";
+      document.body.style.height = "auto";
     }
+    return () => {
+      document.body.style.height = "auto";
+    };
   }, [showScrollExperience]);
 
   const list = [0, 1, 2, 3, 4, 5, 6, 7, 8];

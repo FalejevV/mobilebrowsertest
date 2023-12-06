@@ -37,29 +37,12 @@ function getGradientRandomColors(): [string, string] {
 function EmptyView({ index }: { index: number }) {
   const [fromColor, toColor] = getGradientRandomColors();
 
-  const { inViewRef, inView, horizontalRef, preloadInView } =
-    useInViewHorizontal();
-
-  useEffect(() => {
-    function inViewFunc() {
-      if (inView && inViewRef && inViewRef.current) {
-        const element = inViewRef.current as HTMLDivElement;
-        element.scrollIntoView();
-      }
-    }
-    window.addEventListener("resize", inViewFunc);
-
-    return () => {
-      window.removeEventListener("resize", inViewFunc);
-    };
-  }, [inView, inViewRef]);
-
   return (
     <ViewWrapper>
       <div
         className={`min-w-screen relative flex h-full w-screen items-center snap-always snap-mandatory snap-center justify-center bg-gradient-to-tl from-${fromColor}-400 to-${toColor}-400`}
       >
-        <HorizontalScrollWrap inViewRef={inViewRef}>
+        <HorizontalScrollWrap>
           <HorizontalChildWrap>
             <div className="w-full h-full flex items-center justify-center text-black flex-col gap-4">
               View: {index}
