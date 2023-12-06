@@ -36,7 +36,7 @@ export default function ScrollExperience() {
     <div>
       <button onClick={() => setShowScrollExperience(true)}>SHOW</button>
       {showScrollExperience && (
-        <div className="no-scrollbar fixed left-0 top-0 transition-all duration-100 z-[51] h-dvh flex-col w-screen snap-y snap-mandatory  items-start justify-start flex overflow-scroll bg-white">
+        <div className="no-scrollbar fixed left-0 top-0 z-[51] h-dvh flex-col w-screen snap-y snap-mandatory  items-start justify-start flex overflow-scroll bg-white">
           <EmptyView index={0} />
           <EmptyView index={1} />
           <EmptyView index={2} />
