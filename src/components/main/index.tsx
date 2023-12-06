@@ -19,6 +19,20 @@ export default function ScrollExperience() {
     };
   }, [showScrollExperience]);
 
+  const enterFullscreen = () => {
+    const element = document.documentElement as any;
+
+    if (element.requestFullscreen) {
+      element.requestFullscreen();
+    } else if (element.mozRequestFullScreen) {
+      element.mozRequestFullScreen();
+    } else if (element.webkitRequestFullscreen) {
+      element.webkitRequestFullscreen();
+    } else if (element.msRequestFullscreen) {
+      element.msRequestFullscreen();
+    }
+  };
+
   const list = [0, 1, 2, 3, 4, 5, 6, 7, 8];
 
   const listMemo = useMemo(() => {
