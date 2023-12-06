@@ -20,7 +20,10 @@ export default function ScrollExperience() {
 
   const list = [0, 1, 2, 3, 4, 5, 6, 7, 8];
 
-  const handleDragEnd = (_, info: PanInfo) => {
+  const handleDragEnd = (
+    _: TouchEvent | MouseEvent | PointerEvent,
+    info: PanInfo
+  ) => {
     const { offset } = info;
     if (offset.y > 100 && currentIndex > 0) {
       setCurrentIndex((prevIndex) => prevIndex - 1);
