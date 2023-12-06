@@ -5,29 +5,17 @@ import EmptyView from "../empty-view";
 
 export default function ScrollExperience() {
   const [showScrollExperience, setShowScrollExperience] = useState(false);
-  const [touched, setTouched] = useState(false);
   useEffect(() => {
     if (showScrollExperience) {
       document.body.style.overflow = "hidden";
-      document.body.style.height = "100svh";
-    } else {
-      document.body.style.overflow = "auto";
-      document.body.style.height = "auto";
-    }
-    const enterFullscreen = () => {
-      const element = document.documentElement as any;
-
+      const element = document.documentElement as HTMLElement;
       if (element.requestFullscreen) {
         element.requestFullscreen();
-      } else if (element.mozRequestFullScreen) {
-        element.mozRequestFullScreen();
-      } else if (element.webkitRequestFullscreen) {
-        element.webkitRequestFullscreen();
-      } else if (element.msRequestFullscreen) {
-        element.msRequestFullscreen();
       }
-    };
-    enterFullscreen();
+    } else {
+      document.body.style.overflow = "auto";
+      document.exitFullscreen();
+    }
     return () => {
       document.body.style.height = "auto";
     };
@@ -50,12 +38,16 @@ export default function ScrollExperience() {
       <button onClick={() => setShowScrollExperience(true)}>SHOW</button>
       {showScrollExperience && (
         <div
-          onTouchStart={() => setTouched(true)}
-          onTouchEnd={() => setTouched(false)}
           id="mainContainer"
           className="no-scrollbar fixed left-0 top-0  z-[51] h-dvh  w-screen snap-y snap-mandatory  items-center justify-center overflow-scroll bg-white"
         >
           {listMemo}
+          <button
+            className="absolute left-4 top-4 w-10 h-10 z-[100] bg-red-800"
+            onClick={() => setShowScrollExperience(false)}
+          >
+            exit
+          </button>
         </div>
       )}
     </div>
