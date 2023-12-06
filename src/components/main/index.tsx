@@ -14,7 +14,15 @@ export default function ScrollExperience() {
       }
     } else {
       document.body.style.overflow = "auto";
-      document.exitFullscreen();
+      if (document.fullscreenElement) {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        } else if (document.mozCancelFullScreen) {
+          document.mozCancelFullScreen();
+        } else if (document.webkitExitFullscreen) {
+          document.webkitExitFullscreen();
+        }
+      }
     }
     return () => {
       document.body.style.height = "auto";
