@@ -38,7 +38,7 @@ function EmptyView({ index }: { index: number }) {
   return (
     <ViewWrapper>
       <div
-        className={`min-w-screen relative flex h-full w-screen items-center justify-center bg-gradient-to-tl from-${fromColor}-400 to-${toColor}-400`}
+        className={`min-w-screen relative flex h-full w-screen items-center snap-always snap-mandatory snap-center justify-center bg-gradient-to-tl from-${fromColor}-400 to-${toColor}-400`}
       >
         <HorizontalScrollWrap>
           <HorizontalChildWrap>
