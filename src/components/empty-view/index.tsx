@@ -5,6 +5,7 @@ import ViewWrapper from "../view-wrapper";
 import HorizontalChildWrap from "../horizontal-scroll-wrap/horizontal-child-wrap";
 import { memo, useEffect } from "react";
 import useInViewHorizontal from "../horizontal-in-view-hook";
+import AudioPlayer from "../audio-player";
 
 const colorNames = [
   "red",
@@ -44,9 +45,9 @@ function EmptyView({ index }: { index: number }) {
       >
         <HorizontalScrollWrap>
           <HorizontalChildWrap>
-            <div className="w-full h-full flex items-center justify-center text-black flex-col gap-4">
+            <div className="w-full h-full flex items-center justify-center text-black flex-col gap-4 max-w-sm mx-auto">
               View: {index}
-              <textarea></textarea>
+              <AudioPlayer />
             </div>
           </HorizontalChildWrap>
         </HorizontalScrollWrap>
