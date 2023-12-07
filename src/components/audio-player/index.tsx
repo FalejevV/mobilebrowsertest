@@ -2,10 +2,14 @@ import { memo, useEffect, useRef, useState } from "react";
 import { LuPlay } from "react-icons/lu";
 import { LuPause } from "react-icons/lu";
 import { calculateTime } from "./helper-functions";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 function AudioPlayer() {
   const [isPlaying, setIsPlaying] = useState(false);
-  const [volume, setVolume] = useState(15);
+  const [volume, setVolume] = useState(100);
+  const [canPlay, setCanPlay] = useState(false);
   const audioRef = useRef(null);
+  const audioTrackRef = useRef(null);
+  const volumeInputRef = useRef(null);
   const [audioData, setAudioData] = useState({
     currentTime: 0,
     duration: 0,
@@ -28,7 +32,12 @@ function AudioPlayer() {
       if (isPlaying) audioElement.play();
       if (!isPlaying) audioElement.pause();
     }
+    updateVolumeStyle();
   }, [isPlaying, volume]);
+
+  useEffect(() => {
+    updateTrackStyle();
+  }, [audioData.currentTime]);
 
   function updatePlayTime(e: React.SyntheticEvent<HTMLAudioElement, Event>) {
     let target = e.target as HTMLAudioElement;
@@ -36,10 +45,6 @@ function AudioPlayer() {
       ...prev,
       currentTime: target.currentTime,
     }));
-    target.style.setProperty(
-      "--seek-before-width",
-      `${(audioData.currentTime / audioData.duration) * 100}%`
-    );
   }
 
   function changePlayTime(e: React.ChangeEvent<HTMLInputElement>) {
@@ -59,6 +64,27 @@ function AudioPlayer() {
       let audioElement = audioRef.current as HTMLAudioElement;
       audioElement.volume = Number(e.target.value) / 100;
     }
+    updateVolumeStyle();
+  }
+
+  function updateVolumeStyle() {
+    if (volumeInputRef.current) {
+      const volumeElement = volumeInputRef.current as HTMLInputElement;
+      volumeElement.style.setProperty(
+        "--seek-before-width",
+        `${(volume / 100) * 100}%`
+      );
+    }
+  }
+
+  function updateTrackStyle() {
+    if (audioTrackRef.current) {
+      const trackElement = audioTrackRef.current as HTMLInputElement;
+      trackElement.style.setProperty(
+        "--seek-before-width",
+        `${(audioData.currentTime / audioData.duration) * 100}%`
+      );
+    }
   }
 
   return (
@@ -66,12 +92,19 @@ function AudioPlayer() {
       <audio
         onTimeUpdate={updatePlayTime}
         onLoadedMetadata={setDuration}
+        onEnded={() => {
+          setIsPlaying(false);
+          setAudioData((prev) => ({ ...prev, currentTime: 0 }));
+        }}
         ref={audioRef}
         src={"/Rock.mp3"}
+        onCanPlay={() => setCanPlay(true)}
         preload="metadata"
       />
       <button onClick={() => setIsPlaying((prev) => !prev)}>
-        {isPlaying ? (
+        {!canPlay ? (
+          <AiOutlineLoading3Quarters className="w-7 h-7 stroke-teal-700 animate-spin" />
+        ) : isPlaying ? (
           <LuPause className="w-7 h-7 stroke-teal-700" />
         ) : (
           <LuPlay className="w-7 h-7 stroke-teal-700" />
@@ -81,17 +114,19 @@ function AudioPlayer() {
         {calculateTime(audioData.currentTime)}
       </p>
       <input
+        ref={audioTrackRef}
         min={0}
         max={Math.floor(audioData.duration)}
         value={audioData.currentTime}
         onChange={changePlayTime}
         type="range"
-        className="audio-player appearance-none flex-auto"
+        className="audio-player appearance-none flex-auto accent-teal-600"
       />
       <p className="w-12 text-center select-none">
         {calculateTime(audioData.duration)}
       </p>
       <input
+        ref={volumeInputRef}
         min={0}
         max={100}
         value={volume}
