@@ -101,7 +101,7 @@ function AudioPlayer() {
         onCanPlay={() => setCanPlay(true)}
         preload="metadata"
       />
-      <button onClick={() => setIsPlaying((prev) => !prev)}>
+      <button onClick={() => setIsPlaying((prev) => !prev)} disabled={!canPlay}>
         {!canPlay ? (
           <AiOutlineLoading3Quarters className="w-7 h-7 stroke-teal-700 animate-spin" />
         ) : isPlaying ? (
