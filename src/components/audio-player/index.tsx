@@ -96,14 +96,14 @@ function AudioPlayer() {
           setIsPlaying(false);
           setAudioData((prev) => ({ ...prev, currentTime: 0 }));
         }}
+        onCanPlay={() => setCanPlay(true)}
         ref={audioRef}
         src={"/Rock.mp3"}
-        onCanPlay={() => setCanPlay(true)}
         preload="metadata"
       />
       <button onClick={() => setIsPlaying((prev) => !prev)} disabled={!canPlay}>
         {!canPlay ? (
-          <AiOutlineLoading3Quarters className="w-7 h-7 stroke-teal-700 animate-spin" />
+          <AiOutlineLoading3Quarters className="w-7 h-7  fill-teal-700 animate-spin" />
         ) : isPlaying ? (
           <LuPause className="w-7 h-7 stroke-teal-700" />
         ) : (
