@@ -62,7 +62,7 @@ function AudioPlayer() {
   }
 
   return (
-    <div className="w-full flex items-center gap-2 audio-player p-2 bg-white bg-opacity-10">
+    <div className="w-full flex items-center gap-2 audio-player p-2 bg-white bg-opacity-70 rounded">
       <audio
         onTimeUpdate={updatePlayTime}
         onLoadedMetadata={setDuration}
