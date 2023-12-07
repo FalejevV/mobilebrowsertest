@@ -24,10 +24,11 @@ function AudioPlayer() {
   useEffect(() => {
     if (audioRef.current) {
       let audioElement = audioRef.current as HTMLAudioElement;
+      audioElement.volume = volume / 100;
       if (isPlaying) audioElement.play();
       if (!isPlaying) audioElement.pause();
     }
-  }, [isPlaying]);
+  }, [isPlaying, volume]);
 
   function updatePlayTime(e: React.SyntheticEvent<HTMLAudioElement, Event>) {
     let target = e.target as HTMLAudioElement;
