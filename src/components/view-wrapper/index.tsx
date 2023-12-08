@@ -8,10 +8,12 @@ export default forwardRef<
     title?: string;
     subtitle?: string;
     wrapperTextColor?: string;
+    style?: React.CSSProperties;
   }>
 >(function ViewWrapper(props, ref: ForwardedRef<HTMLDivElement>) {
   return (
     <div
+      style={props.style}
       ref={ref as LegacyRef<HTMLDivElement>}
       className="relative mx-auto my-auto flex h-dvh max-h-dvh min-h-dvh w-screen max-w-4xl flex-col items-center justify-center px-4"
     >

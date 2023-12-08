@@ -2,8 +2,14 @@ import { ReactNode } from "react";
 
 export default function HorizontalChildWrap({
   children,
+  style,
 }: {
   children: ReactNode;
+  style?: any;
 }) {
-  return <div className="h-dvh w-screen min-w-full">{children}</div>;
+  return (
+    <div className="h-dvh w-screen min-w-screen" style={style}>
+      {children}
+    </div>
+  );
 }

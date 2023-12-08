@@ -37,7 +37,9 @@ function getGradientRandomColors(): [string, string] {
 
 function EmptyView({ index }: { index: number }) {
   const [fromColor, toColor] = getGradientRandomColors();
-
+  useEffect(() => {
+    console.log("FETCH", index);
+  }, []);
   return (
     <ViewWrapper>
       <div
@@ -47,6 +49,7 @@ function EmptyView({ index }: { index: number }) {
           <HorizontalChildWrap>
             <div className="w-full h-full flex items-center justify-center text-black flex-col gap-4 max-w-sm mx-auto">
               View: {index}
+              <textarea></textarea>
               <AudioPlayer />
             </div>
           </HorizontalChildWrap>
