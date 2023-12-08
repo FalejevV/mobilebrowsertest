@@ -2,10 +2,6 @@
 
 import { useEffect, useMemo, useState } from "react";
 import EmptyView from "../empty-view";
-import InfiniteLoader from "react-window-infinite-loader";
-import { FixedSizeList } from "react-window";
-import ViewWrapper from "../view-wrapper";
-import HorizontalChildWrap from "../horizontal-scroll-wrap/horizontal-child-wrap";
 import { useVirtualizer } from "@tanstack/react-virtual";
 import React from "react";
 
