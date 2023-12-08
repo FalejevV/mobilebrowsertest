@@ -37,9 +37,7 @@ function getGradientRandomColors(): [string, string] {
 
 function EmptyView({ index }: { index: number }) {
   const [fromColor, toColor] = getGradientRandomColors();
-  useEffect(() => {
-    console.log("FETCH", index);
-  }, []);
+  useEffect(() => {}, []);
   return (
     <ViewWrapper>
       <div

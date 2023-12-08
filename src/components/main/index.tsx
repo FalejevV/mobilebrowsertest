@@ -6,11 +6,11 @@ import InfiniteLoader from "react-window-infinite-loader";
 import { FixedSizeList } from "react-window";
 import ViewWrapper from "../view-wrapper";
 import HorizontalChildWrap from "../horizontal-scroll-wrap/horizontal-child-wrap";
+import { useVirtualizer } from "@tanstack/react-virtual";
+import React from "react";
 
 export default function ScrollExperience() {
   const [showScrollExperience, setShowScrollExperience] = useState(false);
-  const [vh, setVh] = useState(0);
-  const [vw, setVw] = useState(0);
   useEffect(() => {
     if (showScrollExperience) {
       document.body.style.overflow = "hidden";
@@ -45,64 +45,78 @@ export default function ScrollExperience() {
     };
   }, [showScrollExperience]);
 
-  useEffect(() => {
-    setVh(window.innerHeight);
-    setVw(window.innerWidth);
-    window.addEventListener("resize", () => {
-      setVh(window.innerHeight);
-      setVw(window.innerWidth);
-    });
-
-    return () => {
-      window.removeEventListener("resize", () => {
-        setVh(window.innerHeight);
-        setVw(window.innerWidth);
-      });
-    };
-  }, []);
-
-  const [list, setList] = useState([1, 1, 2, 3, 4, 5, 6, 7, 8]);
+  const [list, setList] = useState([1]);
 
   function loadMore() {
     setList((prev) => [...prev, 9, 10, 11, 12, 13]);
+    setHasNextPage(true);
   }
+  const parentRef = React.useRef(null);
+  const [hasNextPage, setHasNextPage] = useState(true);
+  const rowVirtualizer = useVirtualizer({
+    count: hasNextPage ? list.length + 1 : list.length,
+    getScrollElement: () => parentRef.current,
+    estimateSize: () => 100,
+  });
 
+  React.useEffect(() => {
+    const [lastItem] = [...rowVirtualizer.getVirtualItems()].reverse();
+    if (!lastItem) {
+      return;
+    }
+
+    if (lastItem.index >= list.length - 1) {
+      loadMore();
+    }
+  }, [list.length, rowVirtualizer, hasNextPage, showScrollExperience]);
   return (
     <div>
       <button onClick={() => setShowScrollExperience(true)}>SHOW</button>
       {showScrollExperience && (
         <div
-          id="mainContainer"
-          className="no-scrollbar fixed left-0 top-0  z-[51] h-screen  w-screen snap-y snap-mandatory  items-center justify-center overflow-scroll overflow-x-hidden bg-white"
+          ref={parentRef}
+          className="List no-scrollbar fixed left-0 top-0"
+          style={{
+            height: `100dvh`,
+            width: `100dvw`,
+            overflowY: "auto",
+          }}
         >
-          <InfiniteLoader
-            isItemLoaded={(index) => !list[index]}
-            itemCount={list.length + 1}
-            loadMoreItems={loadMore}
+          <div
+            style={{
+              height: `100dvh`,
+              width: "100dvw",
+              position: "relative",
+            }}
+            className="no-scrollbar fixed left-0 top-0  z-[51] h-screen  w-screen snap-y snap-mandatory  items-center justify-center overflow-scroll overflow-x-hidden bg-white"
           >
-            {({ onItemsRendered, ref }) => (
-              <FixedSizeList
-                height={vh}
-                width={vw}
-                itemCount={3}
-                itemSize={vh}
-                ref={ref}
-                className="snap-center snap-mandatory snap-always snap-y no-scrollbar overflow-hidden w-screen"
-              >
-                {({ index, style }) => (
-                  <HorizontalChildWrap key={index} style={style}>
-                    <ViewWrapper>
-                      {list[index] ? (
-                        <EmptyView index={index} />
-                      ) : (
-                        <EmptyView index={-1} />
-                      )}
-                    </ViewWrapper>
-                  </HorizontalChildWrap>
-                )}
-              </FixedSizeList>
-            )}
-          </InfiniteLoader>
+            {rowVirtualizer.getVirtualItems().map((virtualRow) => {
+              const isLoaderRow = virtualRow.index > list.length - 1;
+              return (
+                <div
+                  key={virtualRow.index}
+                  style={{
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    width: "100dvw",
+                    height: `100dvh`,
+                    transform: `translateY(${virtualRow.start}dvh)`,
+                  }}
+                >
+                  {isLoaderRow ? (
+                    true ? (
+                      "Loading more..."
+                    ) : (
+                      "Nothing more to load"
+                    )
+                  ) : (
+                    <EmptyView index={virtualRow.index} />
+                  )}
+                </div>
+              );
+            })}
+          </div>
         </div>
       )}
     </div>
