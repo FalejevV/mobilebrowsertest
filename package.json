@@ -10,11 +10,12 @@
   },
   "dependencies": {
     "@tanstack/react-virtual": "^3.0.1",
-    "framer-motion": "^10.16.14",
+    "framer-motion": "^10.16.16",
     "next": "14.0.3",
     "react": "^18",
     "react-dom": "^18",
     "react-icons": "^4.12.0",
+    "react-swipeable": "^7.0.1",
     "react-window": "^1.8.10",
     "react-window-infinite-loader": "^1.0.9"
   },

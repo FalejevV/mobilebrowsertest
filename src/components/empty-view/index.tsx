@@ -6,6 +6,7 @@ import HorizontalChildWrap from "../horizontal-scroll-wrap/horizontal-child-wrap
 import { memo, useEffect } from "react";
 import useInViewHorizontal from "../horizontal-in-view-hook";
 import AudioPlayer from "../audio-player";
+import HorizontalFirstPage from "../horizontal-first-page";
 
 const colorNames = [
   "red",
@@ -41,16 +42,15 @@ function EmptyView({ index }: { index: number }) {
   return (
     <ViewWrapper>
       <div
-        className={`min-w-screen relative flex h-full w-screen items-center snap-always snap-mandatory snap-center justify-center bg-gradient-to-tl from-${fromColor}-400 to-${toColor}-400`}
+        className={`min-w-screen relative flex h-full w-fit snap-x snap-mandatory snap-center snap-always items-center overflow-visible justify-center bg-gradient-to-tl from-${fromColor}-400 to-${toColor}-400`}
       >
         <HorizontalScrollWrap>
-          <HorizontalChildWrap>
-            <div className="w-full h-full flex items-center justify-center text-black flex-col gap-4 max-w-sm mx-auto">
-              View: {index}
-              <textarea></textarea>
-              <AudioPlayer />
-            </div>
-          </HorizontalChildWrap>
+          <HorizontalFirstPage
+            emoji={index + ""}
+            title={""}
+            fromColor={""}
+            toColor={""}
+          />
         </HorizontalScrollWrap>
       </div>
     </ViewWrapper>

@@ -16,6 +16,12 @@ const config: Config = {
       height: {
         dvh: "100dvh",
       },
+      maxHeight: {
+        dvh: "100dvh",
+      },
+      minHeight: {
+        dvh: "100dvh",
+      },
     },
   },
   safelist: [
@@ -27,6 +33,9 @@ const config: Config = {
     },
     {
       pattern: /text-+/,
+    },
+    {
+      pattern: /top-+/,
     },
   ],
   plugins: [],

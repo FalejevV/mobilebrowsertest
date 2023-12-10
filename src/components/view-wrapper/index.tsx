@@ -1,5 +1,3 @@
-"use client";
-
 import { forwardRef, ForwardedRef, LegacyRef } from "react";
 
 export default forwardRef<
@@ -8,14 +6,13 @@ export default forwardRef<
     title?: string;
     subtitle?: string;
     wrapperTextColor?: string;
-    style?: React.CSSProperties;
+    id?: string;
   }>
 >(function ViewWrapper(props, ref: ForwardedRef<HTMLDivElement>) {
   return (
     <div
-      style={props.style}
-      ref={ref as LegacyRef<HTMLDivElement>}
-      className="relative mx-auto my-auto flex h-dvh max-h-dvh min-h-dvh w-screen max-w-4xl flex-col items-center justify-center px-4"
+      id={props.id}
+      className="relative mx-auto my-auto flex h-screen max-h-screen min-h-screen w-screen max-w-4xl flex-col items-center justify-center px-4"
     >
       {!!props.title && (
         <div className="absolute left-1/2 top-4 -translate-x-1/2 text-center text-3xl font-bold text-teal-700">
@@ -33,6 +30,10 @@ export default forwardRef<
           {props.subtitle}
         </div>
       )}
+      <div
+        ref={ref as LegacyRef<HTMLDivElement>}
+        className={`absolute left-1/2 top-1/2 h-px w-screen -translate-x-1/2 snap-center snap-always bg-transparent`}
+      />
       {props.children}
     </div>
   );
