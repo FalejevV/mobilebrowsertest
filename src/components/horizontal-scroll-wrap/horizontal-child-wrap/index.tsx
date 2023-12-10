@@ -8,7 +8,7 @@ export default function HorizontalChildWrap({
   style?: any;
 }) {
   return (
-    <div className="h-dvh w-screen min-w-screen" style={style}>
+    <div className="h-dvh w-screen min-w-screen overflow-hidden" style={style}>
       {children}
     </div>
   );

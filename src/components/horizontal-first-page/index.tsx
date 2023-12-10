@@ -17,10 +17,10 @@ export default function HorizontalFirstPage({
   return (
     <HorizontalChildWrap>
       <div
-        className={`flex h-dvh min-h-full relative w-screen animate-background-move flex-col items-center justify-center gap-12 bg-gradient-to-tl text-neutral-800 from-${fromColor}-300 to-${toColor}-300 `}
+        className={`flex h-dvh min-h-full relative w-screen animate-background-move overflow-hidden flex-col items-center no-scrollbar justify-center gap-12 bg-gradient-to-tl text-neutral-800 from-${fromColor}-300 to-${toColor}-300 `}
       >
         <ViewWrapper>
-          <div className="flex animate-fade-in flex-col items-center gap-2">
+          <div className="flex animate-fade-in flex-col items-center gap-2 overflow-hidden no-scrollbar">
             <p className="text-4xl">{emoji}</p>
             <h3 className="max-w-5xl px-2 text-center text-3xl font-black opacity-90 sm:px-5 md:text-5xl">
               {title}

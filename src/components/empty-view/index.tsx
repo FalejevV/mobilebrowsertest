@@ -42,7 +42,7 @@ function EmptyView({ index }: { index: number }) {
   return (
     <ViewWrapper>
       <div
-        className={`min-w-screen relative flex h-full w-fit snap-x snap-mandatory snap-center snap-always items-center overflow-visible overflow-y-hidden justify-center bg-gradient-to-tl from-${fromColor}-400 to-${toColor}-400`}
+        className={`min-w-screen no-scrollbar relative flex h-full w-fit snap-x snap-mandatory snap-center snap-always items-center overflow-x-auto overflow-y-hidden justify-center bg-gradient-to-tl from-${fromColor}-400 to-${toColor}-400`}
       >
         <HorizontalScrollWrap>
           <HorizontalFirstPage

@@ -3,7 +3,7 @@
 import { useMemo, useState } from "react";
 import React from "react";
 import EmptyView from "../empty-view";
-import { PanInfo, motion } from "framer-motion";
+import { PanInfo, motion, useDragControls } from "framer-motion";
 
 export default function ScrollExperience() {
   const [currentPageIndex, setCurrentPageIndex] = useState(0);
@@ -22,7 +22,7 @@ export default function ScrollExperience() {
     }
   }
 
-  console.log(currentPageIndex);
+  const controls = useDragControls();
   return (
     <div className="w-screen h-dvh no-scrollbar overflow-hidden">
       <motion.div
@@ -31,13 +31,14 @@ export default function ScrollExperience() {
         dragSnapToOrigin
         dragElastic={0.3}
         onDragEnd={dragHandler}
+        dragControls={controls}
       >
         <div
           style={{
             transition: `transform 0.3s`,
             transform: `translateY(-${currentPageIndex * 100}vh)`,
           }}
-          className="flex flex-col items-start justify-start"
+          className="flex flex-col items-start justify-start overflow-x-hidden no-scrollbar"
         >
           {viewSequence.map((item, index) => (
             <EmptyView key={item} index={index} />
