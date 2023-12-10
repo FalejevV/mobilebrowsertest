@@ -17,7 +17,7 @@ export default function HorizontalFirstPage({
   return (
     <HorizontalChildWrap>
       <div
-        className={`flex h-full min-h-full relative w-screen animate-background-move flex-col items-center justify-center gap-12 bg-gradient-to-tl text-neutral-800 from-${fromColor}-300 to-${toColor}-300 `}
+        className={`flex h-dvh min-h-full relative w-screen animate-background-move flex-col items-center justify-center gap-12 bg-gradient-to-tl text-neutral-800 from-${fromColor}-300 to-${toColor}-300 `}
       >
         <ViewWrapper>
           <div className="flex animate-fade-in flex-col items-center gap-2">
