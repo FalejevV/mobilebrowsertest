@@ -37,6 +37,9 @@ const config: Config = {
     {
       pattern: /top-+/,
     },
+    {
+      pattern: /top-+/,
+    },
   ],
   plugins: [],
 };

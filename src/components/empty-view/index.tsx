@@ -41,9 +41,10 @@ function EmptyView({ index }: { index: number }) {
   useEffect(() => {}, []);
   return (
     <div
-      className={`relative left-0 top-[${
-        index * 100
-      }dvh] w-full h-screen min-h-screen bg-gradient-to-tl from snap-always snap-mandatory snap-x flex items-center justify- overflow-x-auto overflow-y-hidden no-scrollbar`}
+      style={{
+        top: `${index * 100 + 50}vh`,
+      }}
+      className={`absolute -translate-y-1/2 pointer-events-auto left-0  w-full h-screen min-h-screen bg-gradient-to-tl flex snap-always snap-mandatory snap-x overflow-x-auto overflow-y-hidden no-scrollbar`}
     >
       <div
         className={`w-screen min-w-full snap-mandatory snap-center snap-always h-screen overflow-auto flex items-center justify-center bg-gradient-to-tl from-${fromColor}-400 to-${toColor}-400`}
