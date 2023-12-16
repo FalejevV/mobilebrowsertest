@@ -22,25 +22,23 @@ export default function ScrollExperience() {
     }
   }
 
-  const controls = useDragControls();
   return (
     <div className="w-screen min-w-[100vw] h-dvh max-h-dvh no-scrollbar overflow-hidden">
       <motion.div
         drag="y"
         dragConstraints={{ top: 0, bottom: 0 }}
         dragSnapToOrigin
-        dragElastic={0.3}
         onDragEnd={dragHandler}
-        dragControls={controls}
         onDragStart={(e) => e.preventDefault()}
         onDrag={(e) => e.preventDefault()}
+        style={{ touchAction: "none" }}
       >
         <div
           style={{
             transition: `transform 0.3s`,
             transform: `translateY(-${currentPageIndex * 100}dvh)`,
           }}
-          className={`min-w-[100vw] w-screen min-h-screen pointer-events-none no-scrollbar`}
+          className={`min-w-[100vw] w-screen min-h-dvh pointer-events-none no-scrollbar`}
         >
           {viewSequence.map((item, index) => (
             <EmptyView key={item} index={index} />
