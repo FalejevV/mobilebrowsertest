@@ -38,7 +38,7 @@ export default function ScrollExperience() {
             transition: `transform 0.3s`,
             transform: `translateY(-${currentPageIndex * 100}vh)`,
           }}
-          className="flex flex-col items-start justify-start overflow-x-hidden no-scrollbar"
+          className="relative w-screen flex flex-col items-start justify-start overflow-x-hidden no-scrollbar"
         >
           {viewSequence.map((item, index) => (
             <EmptyView key={item} index={index} />

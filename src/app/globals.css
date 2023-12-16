@@ -24,12 +24,8 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
-  overscroll-behavior-y: contain;
 }
 
-* {
-  overscroll-behavior-y: contain;
-}
 .no-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;

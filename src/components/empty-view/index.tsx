@@ -40,20 +40,22 @@ function EmptyView({ index }: { index: number }) {
   const [fromColor, toColor] = getGradientRandomColors();
   useEffect(() => {}, []);
   return (
-    <ViewWrapper>
+    <div
+      className={`relative left-0 top-[${
+        index * 100
+      }dvh] w-full h-screen min-h-screen bg-gradient-to-tl from snap-always snap-mandatory snap-x flex items-center justify- overflow-x-auto overflow-y-hidden no-scrollbar`}
+    >
       <div
-        className={`min-w-screen no-scrollbar relative flex h-full w-fit snap-x snap-mandatory snap-center snap-always items-center overflow-x-auto overflow-y-hidden justify-center bg-gradient-to-tl from-${fromColor}-400 to-${toColor}-400`}
+        className={`w-screen min-w-full snap-mandatory snap-center snap-always h-screen overflow-auto flex items-center justify-center bg-gradient-to-tl from-${fromColor}-400 to-${toColor}-400`}
       >
-        <HorizontalScrollWrap>
-          <HorizontalFirstPage
-            emoji={index + ""}
-            title={""}
-            fromColor={""}
-            toColor={""}
-          />
-        </HorizontalScrollWrap>
+        View {index}
       </div>
-    </ViewWrapper>
+      <div
+        className={`w-screen min-w-full h-screen overflow-auto snap-center snap-always snap-mandatory flex items-center justify-center bg-gradient-to-tl from-${fromColor}-400 to-${toColor}-400`}
+      >
+        <textarea></textarea>
+      </div>
+    </div>
   );
 }
 
