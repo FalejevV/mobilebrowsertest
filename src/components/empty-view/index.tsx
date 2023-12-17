@@ -1,12 +1,6 @@
 "use client";
 
-import HorizontalScrollWrap from "../horizontal-scroll-wrap";
-import ViewWrapper from "../view-wrapper";
-import HorizontalChildWrap from "../horizontal-scroll-wrap/horizontal-child-wrap";
 import { memo, useEffect } from "react";
-import useInViewHorizontal from "../horizontal-in-view-hook";
-import AudioPlayer from "../audio-player";
-import HorizontalFirstPage from "../horizontal-first-page";
 
 const colorNames = [
 	"red",
@@ -58,8 +52,11 @@ function EmptyView({ index }: { index: number }) {
 				<textarea></textarea>
 			</div>
 			<div
-				className={`w-screen min-w-full overflow-auto h-screen p-4 snap-center snap-always snap-mandatory flex items-start justify-center bg-gradient-to-tl from-${fromColor}-400 to-${toColor}-400`}
+				className={`w-screen flex-col min-w-full overflow-auto h-screen p-4 pb-14 snap-center snap-always snap-mandatory flex items-start justify-start bg-gradient-to-tl from-${fromColor}-400 to-${toColor}-400`}
 			>
+				<div className="w-full h-screen min-h-[200px] flex items-center justify-center">
+					blank space
+				</div>
 				<p className="p-2 text-black">
 					Lorem, ipsum dolor sit amet consectetur adipisicing elit. Et
 					magnam vero sunt alias optio illum impedit, hic inventore
