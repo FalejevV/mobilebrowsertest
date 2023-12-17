@@ -24,7 +24,7 @@ export default function ScrollExperience() {
 				currentPageIndex * 100 * -1
 			}dvh + ${swipeDifference * -1}px * -1))`;
 			(dragRef.current as HTMLDivElement).style.transition =
-				"transform 0s";
+				"transform 0.1s";
 		}
 	}
 	console.log(currentPageIndex);
