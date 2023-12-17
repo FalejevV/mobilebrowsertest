@@ -60,7 +60,7 @@ function EmptyView({ index }: { index: number }) {
 			<div
 				className={`w-screen min-w-full h-screen overflow-auto p-4 snap-center snap-always snap-mandatory flex items-start justify-center bg-gradient-to-tl from-${fromColor}-400 to-${toColor}-400`}
 			>
-				<p className="p-2 text-black">
+				<p className="p-2 text-black pb-10">
 					Lorem, ipsum dolor sit amet consectetur adipisicing elit. Et
 					magnam vero sunt alias optio illum impedit, hic inventore
 					quos perspiciatis, blanditiis delectus possimus ipsa
