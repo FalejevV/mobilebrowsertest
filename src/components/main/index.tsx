@@ -31,6 +31,7 @@ export default function ScrollExperience() {
 				onTouchEnd={touchEndHandler}
 			>
 				<div
+					id="mainScroll"
 					ref={dragRef}
 					style={{
 						transition: `transform 0.3s`,

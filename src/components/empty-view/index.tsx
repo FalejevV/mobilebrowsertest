@@ -45,7 +45,7 @@ function EmptyView({ index }: { index: number }) {
 			style={{
 				top: `${index * 100 + 50}dvh`,
 			}}
-			className={`absolute -translate-y-[50dvh] pointer-events-auto left-0  w-full h-screen min-h-screen bg-gradient-to-tl flex snap-always snap-mandatory snap-x overflow-auto no-scrollbar`}
+			className={`absolute -translate-y-[50dvh] pointer-events-auto left-0  w-full h-screen min-h-screen bg-gradient-to-tl flex snap-always snap-mandatory snap-x overflow-y-hidden no-scrollbar`}
 		>
 			<div
 				className={`w-screen min-w-full snap-mandatory snap-center snap-always h-screen overflow-auto flex items-center justify-center bg-gradient-to-tl from-${fromColor}-400 to-${toColor}-400`}
