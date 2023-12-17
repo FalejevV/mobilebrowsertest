@@ -45,22 +45,22 @@ function EmptyView({ index }: { index: number }) {
 			style={{
 				top: `${index * 100 + 50}dvh`,
 			}}
-			className={`absolute -translate-y-[50dvh] pointer-events-auto left-0  w-full h-screen min-h-screen bg-gradient-to-tl flex snap-always snap-mandatory snap-x overflow-y-hidden no-scrollbar`}
+			className={`absolute -translate-y-[50dvh] pointer-events-auto left-0  w-full h-screen min-h-screen bg-gradient-to-tl flex snap-always snap-mandatory snap-x overflow-y-hidden overflow-x-auto max-w-dvh no-scrollbar`}
 		>
 			<div
-				className={`w-screen min-w-full snap-mandatory snap-center snap-always h-screen overflow-auto flex items-center justify-center bg-gradient-to-tl from-${fromColor}-400 to-${toColor}-400`}
+				className={`w-screen min-w-full overflow-auto snap-mandatory snap-center snap-always h-screen flex items-center justify-center bg-gradient-to-tl from-${fromColor}-400 to-${toColor}-400`}
 			>
 				View {index}
 			</div>
 			<div
-				className={`w-screen min-w-full h-screen overflow-auto snap-center snap-always snap-mandatory flex items-center justify-center bg-gradient-to-tl from-${fromColor}-400 to-${toColor}-400`}
+				className={`w-screen min-w-full overflow-auto h-screen snap-center snap-always snap-mandatory flex items-center justify-center bg-gradient-to-tl from-${fromColor}-400 to-${toColor}-400`}
 			>
 				<textarea></textarea>
 			</div>
 			<div
-				className={`w-screen min-w-full h-screen overflow-auto p-4 snap-center snap-always snap-mandatory flex items-start justify-center bg-gradient-to-tl from-${fromColor}-400 to-${toColor}-400`}
+				className={`w-screen min-w-full overflow-auto h-screen p-4 snap-center snap-always snap-mandatory flex items-start justify-center bg-gradient-to-tl from-${fromColor}-400 to-${toColor}-400`}
 			>
-				<p className="p-2 text-black pb-10">
+				<p className="p-2 text-black">
 					Lorem, ipsum dolor sit amet consectetur adipisicing elit. Et
 					magnam vero sunt alias optio illum impedit, hic inventore
 					quos perspiciatis, blanditiis delectus possimus ipsa
