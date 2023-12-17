@@ -24,6 +24,10 @@ export default function useDrag({
 		};
 	}, []);
 
+	function touchStartHandler(e: React.TouchEvent<HTMLDivElement>) {
+		setTouchStart(e.touches[0].screenY);
+	}
+
 	function touchMoveHandler(e: React.TouchEvent<HTMLDivElement>) {
 		if (dragRef?.current) {
 			let swipeDifference = e.touches[0].screenY - touchStart;
@@ -89,5 +93,6 @@ export default function useDrag({
 		currentPageIndex,
 		setCurrentPageIndex,
 		setTouchStart,
+		touchStartHandler,
 	};
 }
