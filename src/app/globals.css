@@ -24,10 +24,10 @@ body {
 			rgb(var(--background-end-rgb))
 		)
 		rgb(var(--background-start-rgb));
-	scroll-behavior: none;
+	overscroll-behavior: none;
 }
 * {
-	scroll-behavior: none;
+	overscroll-behavior: none;
 }
 
 .no-scrollbar {
