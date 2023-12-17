@@ -1,7 +1,7 @@
 "use client";
 
 import { useInView } from "framer-motion";
-import { memo, useEffect, useRef } from "react";
+import { memo, useEffect, useId, useRef } from "react";
 
 const colorNames = [
   "red",
@@ -32,9 +32,46 @@ function getGradientRandomColors(): [string, string] {
 }
 
 function EmptyView({ index }: { index: number }) {
+  const id = useId();
+  const scrollRef = useRef(null);
+  const inScrollView = useInView(scrollRef);
+  useEffect(() => {
+    const handleArrowKeys: EventListener = (event) => {
+      const { key } = event as KeyboardEvent;
+      if (key === "ArrowLeft" || key === "ArrowRight") {
+        event.preventDefault();
+        const scrollLeftDistance = window.outerWidth / 2 + 50;
+        const scrollContainer = document.getElementById(id);
+        let newScrollLeft = scrollContainer?.scrollLeft || 0;
+
+        if (key === "ArrowLeft") {
+          newScrollLeft -= scrollLeftDistance;
+        } else if (key === "ArrowRight") {
+          newScrollLeft += scrollLeftDistance;
+        }
+        scrollContainer?.scrollTo({
+          left: newScrollLeft,
+          behavior: "smooth",
+        });
+      }
+    };
+    if (!inScrollView) {
+      document.removeEventListener("keydown", handleArrowKeys);
+      document.removeEventListener("scrollRightInHorizontal", handleArrowKeys);
+      return;
+    }
+    document.addEventListener("scrollRightInHorizontal", handleArrowKeys);
+    document.addEventListener("keydown", handleArrowKeys);
+    return () => {
+      document.removeEventListener("keydown", handleArrowKeys);
+      document.removeEventListener("scrollRightInHorizontal", handleArrowKeys);
+    };
+  }, [id, inScrollView]);
   const [fromColor, toColor] = getGradientRandomColors();
   return (
     <div
+      ref={scrollRef}
+      id={id}
       style={{
         top: `${index * 100}dvh`,
       }}
