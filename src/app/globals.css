@@ -26,6 +26,9 @@ body {
 		rgb(var(--background-start-rgb));
 	scroll-behavior: none;
 }
+* {
+	scroll-behavior: none;
+}
 
 .no-scrollbar {
 	-ms-overflow-style: none;
