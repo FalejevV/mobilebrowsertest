@@ -29,6 +29,16 @@ export default function useDrag({
 	function touchStartHandler(e: React.TouchEvent<HTMLDivElement>) {
 		setTouchStart(e.touches[0].screenY);
 		let target = e.target as HTMLElement;
+		if (target.tagName === "TEXTAREA" && dragRef.current) {
+			(dragRef.current as HTMLDivElement).style.transition =
+				"transform 0.0s";
+			setTimeout(() => {
+				if (dragRef.current) {
+					(dragRef.current as HTMLDivElement).style.transition =
+						"transform 0.3s";
+				}
+			}, 300);
+		}
 		let scrollBarFound = false;
 		while (target.parentElement) {
 			target = target.parentElement as HTMLElement;
