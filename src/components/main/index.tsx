@@ -15,6 +15,7 @@ export default function ScrollExperience() {
 		setTouchStart,
 		currentPageIndex,
 		setCurrentPageIndex,
+		touchStartHandler,
 	} = useDrag({
 		length: viewSequence.length,
 		triggerDistance: 80,
@@ -26,7 +27,7 @@ export default function ScrollExperience() {
 			<div
 				className="w-screen min-w-full pointer-events-none no-scrollbar relative"
 				onTouchMove={touchMoveHandler}
-				onTouchStart={(e) => setTouchStart(e.touches[0].screenY)}
+				onTouchStart={touchStartHandler}
 				onTouchEnd={touchEndHandler}
 			>
 				<div
