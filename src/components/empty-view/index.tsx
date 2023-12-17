@@ -35,9 +35,7 @@ function getGradientRandomColors(): [string, string] {
 function EmptyView({ index }: { index: number }) {
 	const containerRef = useRef(null);
 	const inView = useInView(containerRef, {
-		margin: `${window ? window.innerHeight * 2.3 : 1000}px 0px 0px ${
-			window ? window.innerHeight * 2.3 : 1000
-		}px`,
+		margin: `220% 0px 0px 220%`,
 	});
 
 	const [fromColor, toColor] = getGradientRandomColors();
