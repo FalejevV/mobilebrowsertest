@@ -17,6 +17,11 @@ export default function ScrollExperience() {
 			} else if (swipeDifference < -100) {
 				swipeDifference = -100;
 			}
+			if (swipeDifference > 0 && swipeDifference < 30) {
+				swipeDifference = 0;
+			} else if (swipeDifference < 0 && swipeDifference > -30) {
+				swipeDifference = 0;
+			}
 
 			(
 				dragRef.current as HTMLDivElement
