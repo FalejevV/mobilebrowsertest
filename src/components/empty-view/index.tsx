@@ -34,6 +34,36 @@ function getGradientRandomColors(): [string, string] {
 
 function EmptyView({ index }: { index: number }) {
 	const [fromColor, toColor] = getGradientRandomColors();
+
+	function addClass() {
+		const container = document.getElementById(`area-container-${index}`);
+		if (!container) return;
+		container.classList.add(
+			"fixed",
+			"w-full",
+			"h-full",
+			"bg-black",
+			"flex",
+			"left-0",
+			"top-0",
+			"justify-center"
+		);
+	}
+	function removeClass() {
+		const container = document.getElementById(`area-container-${index}`);
+		if (!container) return;
+		container.classList.remove(
+			"fixed",
+			"w-full",
+			"h-full",
+			"bg-black",
+			"flex",
+			"left-0",
+			"top-0",
+			"justify-center"
+		);
+	}
+
 	return (
 		<div
 			className={`relative transition-all duration-0 pointer-events-auto  w-full h-screen min-h-screen bg-gradient-to-tl flex snap-always snap-mandatory snap-center snap-x overflow-y-hidden overflow-x-auto max-w-dvh no-scrollbar`}
@@ -47,8 +77,17 @@ function EmptyView({ index }: { index: number }) {
 				className={`w-screen flex-col min-w-full overflow-auto h-screen snap-center snap-always snap-mandatory flex items-center justify-start p-4 gap-4 bg-gradient-to-tl from-${fromColor}-400 to-${toColor}-400`}
 			>
 				<div className="w-full flex-auto border-2"></div>
-				<textarea className="w-full focus:fixed focus:left-1/2 focus:top-1/2 focus:-translate-x-1/2 focus:-translate-y-1/2"></textarea>
-				<button className="w-full p-4 bg-green-300">Button</button>
+				<div
+					className="flex flex-col bg-black bg-opacity-40 gap-2"
+					id={`area-container-${index}`}
+				>
+					<textarea
+						onFocus={addClass}
+						onBlur={removeClass}
+						id={`area-${index}`}
+					></textarea>
+					<button className="w-full p-4 bg-green-300">Button</button>
+				</div>
 			</div>
 			<div
 				className={`w-screen flex-col min-w-full overflow-auto h-screen p-4 pb-14 snap-center snap-always snap-mandatory flex items-start justify-start bg-gradient-to-tl from-${fromColor}-400 to-${toColor}-400`}
