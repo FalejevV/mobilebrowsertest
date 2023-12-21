@@ -1,7 +1,7 @@
 "use client";
 
 import { useInView } from "framer-motion";
-import { memo, useEffect, useId, useRef } from "react";
+import { memo, useEffect, useId, useMemo, useRef } from "react";
 
 const colorNames = [
   "red",
@@ -31,7 +31,13 @@ function getGradientRandomColors(): [string, string] {
   return [fromColor, toColor];
 }
 
-function EmptyView({ index }: { index: number }) {
+function EmptyView({
+  index,
+  currentIndex,
+}: {
+  index: number;
+  currentIndex: number;
+}) {
   const id = useId();
   const scrollRef = useRef(null);
   const inScrollView = useInView(scrollRef);
@@ -49,13 +55,14 @@ function EmptyView({ index }: { index: number }) {
         } else if (key === "ArrowRight") {
           newScrollLeft += scrollLeftDistance;
         }
+
         scrollContainer?.scrollTo({
           left: newScrollLeft,
           behavior: "smooth",
         });
       }
     };
-    if (!inScrollView) {
+    if (index !== currentIndex) {
       document.removeEventListener("keydown", handleArrowKeys);
       document.removeEventListener("scrollRightInHorizontal", handleArrowKeys);
       return;
@@ -66,8 +73,20 @@ function EmptyView({ index }: { index: number }) {
       document.removeEventListener("keydown", handleArrowKeys);
       document.removeEventListener("scrollRightInHorizontal", handleArrowKeys);
     };
-  }, [id, inScrollView]);
-  const [fromColor, toColor] = getGradientRandomColors();
+  }, [id, index, currentIndex]);
+  const [fromColor, toColor] = useMemo(() => getGradientRandomColors(), []);
+  useEffect(() => {
+    if (index === currentIndex) {
+      const scrollContainer = document.getElementById(id);
+      scrollContainer?.scrollTo({
+        left: 0,
+        behavior: "instant",
+      });
+    }
+  }, [currentIndex, id, index]);
+
+  if (currentIndex - 1 > index) return <></>;
+  if (currentIndex + 1 < index) return <></>;
   return (
     <div
       ref={scrollRef}

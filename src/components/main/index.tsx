@@ -47,7 +47,11 @@ export default function ScrollExperience() {
           className={`min-w-[100vw] w-screen min-h-dvh pointer-events-none no-scrollbar relative`}
         >
           {viewSequence.map((item, index) => (
-            <EmptyView key={item} index={index} />
+            <EmptyView
+              key={item}
+              index={index}
+              currentIndex={currentPageIndex}
+            />
           ))}
         </div>
       </div>
