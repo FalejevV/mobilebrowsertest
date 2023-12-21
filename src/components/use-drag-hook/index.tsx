@@ -30,7 +30,7 @@ export default function useDrag({
     setTouchStart(e.touches[0].screenY);
     let target = e.target as HTMLElement;
     if (target.tagName === "TEXTAREA" && dragRef.current) {
-      (dragRef.current as HTMLDivElement).style.transition = "transform 0.0s";
+      (dragRef.current as HTMLDivElement).style.transition = "transform 0s";
       setTimeout(() => {
         if (dragRef.current) {
           (dragRef.current as HTMLDivElement).style.transition =
@@ -128,7 +128,7 @@ export default function useDrag({
       });
     }
     if (dragRef?.current) {
-      (dragRef.current as HTMLDivElement).style.transition = "transform 0s";
+      (dragRef.current as HTMLDivElement).style.transition = "transform 0.3s";
       (dragRef.current as HTMLDivElement).style.transform = `translateY(${
         currentPageIndex * 100 * -1
       }dvh)`;

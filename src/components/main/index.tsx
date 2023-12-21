@@ -41,7 +41,7 @@ export default function ScrollExperience() {
           id="mainScroll"
           ref={dragRef}
           style={{
-            transition: `transform 0s`,
+            transition: `transform 0.3s`,
             transform: `translateY(-${currentPageIndex * 100}dvh)`,
           }}
           className={`min-w-[100vw] w-screen min-h-dvh pointer-events-none no-scrollbar relative`}
