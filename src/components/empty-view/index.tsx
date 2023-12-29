@@ -70,9 +70,16 @@ function EmptyView({
 		);
 	}
 	function scrollTop() {
-		setTimeout(() => {
-			window.scrollTo(0, 1);
-		}, 1000);
+		if (scrollRef && scrollRef.current) {
+			setTimeout(() => {
+				scrollRef &&
+					scrollRef.current &&
+					scrollRef.current.scrollTo(
+						0,
+						scrollRef.current.scrollTop - 10
+					);
+			}, 1000);
+		}
 	}
 	return (
 		<div
