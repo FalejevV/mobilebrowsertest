@@ -1,7 +1,7 @@
 "use client";
 
 import { useInView } from "framer-motion";
-import { memo, useEffect, useId, useRef } from "react";
+import { RefObject, memo, useEffect, useId, useRef } from "react";
 
 const colorNames = [
 	"red",
@@ -32,7 +32,13 @@ function getGradientRandomColors(): [string, string] {
 	return [fromColor, toColor];
 }
 
-function EmptyView({ index }: { index: number }) {
+function EmptyView({
+	index,
+	scrollRef,
+}: {
+	index: number;
+	scrollRef: RefObject<HTMLDivElement>;
+}) {
 	const [fromColor, toColor] = getGradientRandomColors();
 
 	function addClass() {
@@ -63,7 +69,11 @@ function EmptyView({ index }: { index: number }) {
 			"justify-center"
 		);
 	}
-
+	function scrollTop() {
+		setTimeout(() => {
+			window.scrollTo(0, 1);
+		}, 1000);
+	}
 	return (
 		<div
 			className={`relative transition-all duration-0 pointer-events-auto  w-full h-screen min-h-screen bg-gradient-to-tl flex snap-always snap-mandatory snap-center snap-x overflow-y-hidden overflow-x-auto max-w-dvh no-scrollbar`}
@@ -72,6 +82,7 @@ function EmptyView({ index }: { index: number }) {
 				className={`w-screen min-w-full overflow-auto snap-mandatory snap-center snap-always h-screen flex items-center justify-center bg-gradient-to-tl from-${fromColor}-400 to-${toColor}-400`}
 			>
 				View {index}
+				<button onClick={scrollTop}>ASSSS</button>
 			</div>
 			<div
 				className={`w-screen flex-col min-w-full overflow-auto h-screen snap-center snap-always snap-mandatory flex items-center justify-start p-4 gap-4 bg-gradient-to-tl from-${fromColor}-400 to-${toColor}-400`}
