@@ -8,7 +8,7 @@ export default function ScrollExperience() {
 	const [viewSequence, setViewSequence] = useState([1, 2, 3, 4, 5, 6, 7]);
 
 	return (
-		<div className="w-screen min-w-[100vw] h-dvh no-scrollbar overflow-y-auto overflow-x-hidden snap-always snap-y snap-center snap-mandatory">
+		<div className="fixed w-screen min-w-[100vw] h-dvh no-scrollbar overflow-y-auto overflow-x-hidden snap-always snap-y snap-center snap-mandatory">
 			{viewSequence.map((item, index) => (
 				<EmptyView key={item} index={index} />
 			))}
