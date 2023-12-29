@@ -63,13 +63,7 @@ function EmptyView({ index }: { index: number }) {
 			"justify-center"
 		);
 	}
-	useEffect(() => {
-		document.body.style.position = "fixed";
 
-		return () => {
-			document.body.style.position = "relative";
-		};
-	}, []);
 	return (
 		<div
 			className={`relative transition-all duration-0 pointer-events-auto  w-full h-screen min-h-screen bg-gradient-to-tl flex snap-always snap-mandatory snap-center snap-x overflow-y-hidden overflow-x-auto max-w-dvh no-scrollbar`}
