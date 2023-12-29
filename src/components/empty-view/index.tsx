@@ -64,7 +64,9 @@ function EmptyView({ index }: { index: number }) {
 		);
 	}
 	function scrollbar() {
-		window.scrollTo(0, -1);
+		setTimeout(() => {
+			window.scrollTo(0, 1);
+		}, 1000);
 	}
 	return (
 		<div
