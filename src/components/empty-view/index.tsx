@@ -63,7 +63,9 @@ function EmptyView({ index }: { index: number }) {
 			"justify-center"
 		);
 	}
-
+	function scrollbar() {
+		window.scrollTo(0, -1);
+	}
 	return (
 		<div
 			className={`relative transition-all duration-0 pointer-events-auto  w-full h-screen min-h-screen bg-gradient-to-tl flex snap-always snap-mandatory snap-center snap-x overflow-y-hidden overflow-x-auto max-w-dvh no-scrollbar`}
@@ -72,13 +74,14 @@ function EmptyView({ index }: { index: number }) {
 				className={`w-screen min-w-full overflow-auto snap-mandatory snap-center snap-always h-screen flex items-center justify-center bg-gradient-to-tl from-${fromColor}-400 to-${toColor}-400`}
 			>
 				View {index}
+				<button onClick={scrollbar}>Scroll</button>
 			</div>
 			<div
 				className={`w-screen flex-col min-w-full overflow-auto h-screen snap-center snap-always snap-mandatory flex items-center justify-start p-4 gap-4 bg-gradient-to-tl from-${fromColor}-400 to-${toColor}-400`}
 			>
 				<div className="w-full flex-auto border-2"></div>
 				<div
-					className="flex flex-col bg-black bg-opacity-40 gap-2"
+					className="flex bg-black bg-opacity-40 gap-2"
 					id={`area-container-${index}`}
 				>
 					<textarea
